@@ -136,6 +136,7 @@ const SendBar = (props: SendBarProps) => {
         
         // Open the generated PDF in a new tab
         window.open(pdfUrl, '_blank')
+        alert('Your file will open shortly.')
       } catch (error) {
         console.error('Error generating file:', error)
       }
