@@ -53,7 +53,7 @@ const handler = async (req: Request): Promise<Response> => {
     const stream = await OpenAIStream(apiUrl, apiKey, model, messagesToSend)
     // const stream = await FlaskStream(apiUrl, messagesToSend)
 
-    // return new Response(stream)
+     return new Response(stream)
   } catch (error) {
     console.error(error)
     return new Response('Error', { status: 500 })
