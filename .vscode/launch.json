@@ -1,0 +1,38 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch Backend",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/backend/app.py",
+            "cwd": "${workspaceFolder}/backend",
+            "env": {
+                "FLASK_APP": "app.py",
+                "FLASK_ENV": "development"
+            },
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Launch Frontend",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/frontend/node_modules/.bin/next",
+            "args": ["dev"],
+            "cwd": "${workspaceFolder}/frontend",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": ["run", "dev"],
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Launch Frontend (Standalone)",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/frontend/server.js",
+            "cwd": "${workspaceFolder}/frontend",
+            "runtimeExecutable": "node",
+            "args": [],
+            "console": "integratedTerminal"
+        }
+    ]
+}
