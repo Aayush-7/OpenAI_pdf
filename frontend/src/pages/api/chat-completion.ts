@@ -5,6 +5,7 @@ export const config = {
   runtime: 'edge'
 }
 
+
 const handler = async (req: Request): Promise<Response> => {
   try {
     const { messages } = (await req.json()) as {
@@ -58,6 +59,60 @@ const handler = async (req: Request): Promise<Response> => {
     return new Response('Error', { status: 500 })
   }
 }
+
+// const handler = async (req: Request): Promise<Response> => {
+//   try {
+//     const { messages } = (await req.json()) as {
+//       messages: Message[]
+//     }
+
+//     const charLimit = 12000
+//     let charCount = 0
+//     let messagesToSend = []
+
+//     for (let i = 0; i < messages.length; i++) {
+//       const message = messages[i]
+//       if (charCount + message.content.length > charLimit) {
+//         break
+//       }
+//       charCount += message.content.length
+//       messagesToSend.push(message)
+//     }
+
+//     const useAzureOpenAI =
+//       process.env.AZURE_OPENAI_API_BASE_URL && process.env.AZURE_OPENAI_API_BASE_URL.length > 0
+
+//     let apiUrl: string
+//     let apiKey: string
+//     let model: string
+//     if (useAzureOpenAI) {
+//       let apiBaseUrl = process.env.AZURE_OPENAI_API_BASE_URL
+//       const version = '2024-02-01'
+//       const deployment = process.env.AZURE_OPENAI_DEPLOYMENT || ''
+//       if (apiBaseUrl && apiBaseUrl.endsWith('/')) {
+//         apiBaseUrl = apiBaseUrl.slice(0, -1)
+//       }
+//       apiUrl = `${apiBaseUrl}/openai/deployments/${deployment}/chat/completions?api-version=${version}`
+//       apiKey = process.env.AZURE_OPENAI_API_KEY || ''
+//       model = '' // Azure Open AI always ignores the model and decides based on the deployment name passed through.
+//     } else {
+//       let apiBaseUrl = process.env.OPENAI_API_BASE_URL || 'https://api.openai.com'
+//       if (apiBaseUrl && apiBaseUrl.endsWith('/')) {
+//         apiBaseUrl = apiBaseUrl.slice(0, -1)
+//       }
+//       apiUrl = `${apiBaseUrl}/v1/chat/completions`
+//       apiKey = process.env.OPENAI_API_KEY || ''
+//       model = 'gpt-3.5-turbo' // todo: allow this to be passed through from client and support gpt-4
+//     }
+//     const stream = await OpenAIStream(apiUrl, apiKey, model, messagesToSend)
+//     // const stream = await FlaskStream(apiUrl, messagesToSend)
+
+//     // return new Response(stream)
+//   } catch (error) {
+//     console.error(error)
+//     return new Response('Error', { status: 500 })
+//   }
+// }
 // const FlaskStream = async(apiUrl: string, messages: Message[]) => {
 //   const encoder = new TextEncoder()
 //   const decoder = new TextDecoder()
