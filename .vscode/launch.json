@@ -3,7 +3,7 @@
     "configurations": [
         {
             "name": "Launch Backend",
-            "type": "debugpy",
+            "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/backend/app.py",
             "cwd": "${workspaceFolder}/backend",

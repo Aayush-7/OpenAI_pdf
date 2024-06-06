@@ -8,11 +8,14 @@ import requests
 import os
 from dotenv import load_dotenv
 import textwrap
+from flask_cors import CORS
+
 
 # Load environment variables from .env file
 load_dotenv()
 
 app = Flask(__name__)
+CORS(app)
 
 # Set your OpenAI API key here
 api_key = os.getenv('OPENAI_API_KEY')
@@ -30,6 +33,12 @@ def draw_text(canvas, text_list, x, y, line_height):
         canvas.drawString(x, y, line)
         y -= line_height
     return y
+
+@app.after_request
+def after_request(response):
+    response.headers.add('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
+    return response
 
 @app.route('/')
 def home():
@@ -92,4 +101,5 @@ def generate_pdf():
     return send_file(buffer, as_attachment=True, download_name='output.pdf', mimetype='application/pdf')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='localhost', port=5000, debug=True)
+

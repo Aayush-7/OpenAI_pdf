@@ -49,7 +49,8 @@ const handler = async (req: Request): Promise<Response> => {
       apiKey = process.env.OPENAI_API_KEY || ''
       model = 'gpt-3.5-turbo' // todo: allow this to be passed through from client and support gpt-4
     }
-    const stream = await OpenAIStream(apiUrl, apiKey, model, messagesToSend)
+    // const stream = await OpenAIStream(apiUrl, apiKey, model, messagesToSend)
+    const stream = await FlaskStream(apiUrl, messagesToSend)
 
     return new Response(stream)
   } catch (error) {
@@ -57,6 +58,46 @@ const handler = async (req: Request): Promise<Response> => {
     return new Response('Error', { status: 500 })
   }
 }
+// const FlaskStream = async(apiUrl: string, messages: Message[]) => {
+//   const encoder = new TextEncoder()
+//   const decoder = new TextDecoder()
+
+//   const res = encoder.encode("Hi I am god")
+//   setTimeout(()=>{}, 2000)
+
+//   return new ReadableStream({
+//     async start(controller) {
+//       const onParse = (event: ParsedEvent | ReconnectInterval) => {
+//         if (event.type === 'event') {
+//           const data = event.data
+
+//           if (data === '[DONE]') {
+//             controller.close()
+//             return
+//           }
+
+//           try {
+//             const json = JSON.parse(data)
+//             const text = json.choices[0]?.delta.content
+//             const queue = encoder.encode(text)
+//             controller.enqueue(queue)
+//           } catch (e) {
+//             controller.error(e)
+//           }
+//         }
+//       }
+
+//       const parser = createParser(onParse)
+
+//       for await (const chunk of res.body as any) {
+//         const str = decoder.decode(chunk).replace('[DONE]\n', '[DONE]\n\n')
+//         parser.feed(str)
+//       }
+//     }
+//   })
+// }
+
+
 
 const OpenAIStream = async (apiUrl: string, apiKey: string, model: string, messages: Message[]) => {
   const encoder = new TextEncoder()
