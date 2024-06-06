@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { ChatGPTProps, ChatRole } from './interface'
 import MessageItem from './MessageItem'
@@ -28,6 +28,5 @@ const ChatGPT = (props: ChatGPTProps) => {
       />
     </div>
   )
-}
-
+    }
 export default ChatGPT
