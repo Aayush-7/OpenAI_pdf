@@ -2,7 +2,7 @@
 
 ## Vercel Link
 link: https://open-ai-pdf-wlqb.vercel.app/
-# Important: Please unblock Pop ups
+### Important: Please unblock Pop-ups on your browser
 
 ## Development
 
