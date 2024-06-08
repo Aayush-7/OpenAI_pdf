@@ -1,5 +1,9 @@
 # OpenAI PDF
 
+## Vercel Link
+link: https://open-ai-pdf-wlqb.vercel.app/
+# Important: Please unblock Pop ups
+
 ## Development
 
 ### Running Locally
