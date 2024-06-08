@@ -117,7 +117,7 @@ const SendBar = (props: SendBarProps) => {
       
       // Make a POST request to the backend API
       try {
-        const response = await fetch('http://api.minetest.in/generate', {
+        const response = await fetch('https://api.minetest.in/generate', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
